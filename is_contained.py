@@ -68,14 +68,13 @@ def is_contained(array, row, col):
             # top or bottom row.
             if row == 0:
                 seen_above = False
+            elif array[row - 1][i] == 1:
+                seen_above = True
+
             if row == num_rows - 1:
                 seen_below = False
-
-            if array[row + 1][i] == 1:
+            elif array[row + 1][i] == 1:
                 seen_below = True
-
-            if array[row - 1][i] == 1:
-                seen_above = True
 
             if seen_above and seen_below:
                 num_crossings += 1
@@ -101,4 +100,4 @@ test3 = [[1,1,1,0,0,0],
          [1,0,0,0,0,1],
          [1,1,1,1,1,1]]
 
-print is_contained(test3, 2,1)
+print is_contained(test3, 0,5)
