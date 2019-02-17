@@ -32,14 +32,19 @@ wall if you see wall above and below you. Consider the following three cases:
 
 ->  11111   # We go *along* a "C shape" of the wall. Because we only
     1   1   # ever see wall below us, this means that once we're on the other
-    1   1   # side of the wall, we haven't actually changed state.
+    1   1   # side of the wall, we haven't actually changed state. In continuous
+            # math, this is analogous to either missing the edge of the shape
+            # entirely (0 crossings), or crossing twice, both of which don't
+            # change our state.
 
 
         1
         1
 ->  11111   # We go *along* a "Z shape" of the wall. We first see wall below,
     1       # then we eventually also see wall above. This means that once we
-    1       # are on the other side, we have changed state.
+    1       # are on the other side, we have changed state. In continuous math,
+            # this is analogous to crossing the wall at a single infinitesimally
+            # small point.
 
 '''
 def is_contained(array, row, col):
