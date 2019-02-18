@@ -33,9 +33,8 @@ wall if you see wall above and below you. Consider the following three cases:
 ->  11111   # We go *along* a "C shape" of the wall. Because we only
     1   1   # ever see wall below us, this means that once we're on the other
     1   1   # side of the wall, we haven't actually changed state. In continuous
-            # math, this is analogous to either missing the edge of the shape
-            # entirely (0 crossings), or crossing twice, both of which don't
-            # change our state.
+            # math, this is analogous to grazing the wall tangent, which does
+            # not change our state.
 
 
         1
@@ -56,8 +55,7 @@ def is_contained(array, row, col):
     num_cols = len(array[0])
 
     num_crossings = 0
-    seen_above = False
-    seen_below = False
+    seen_above = seen_below = False
 
     for i in range(col, num_cols):
         current_value = array[row][i]
@@ -78,10 +76,12 @@ def is_contained(array, row, col):
 
             if seen_above and seen_below:
                 num_crossings += 1
-    
-    odd_number_of_crossings = num_crossings % 2 > 0
-    return odd_number_of_crossings
 
+    # The point is contained only if we crossed through an odd number of walls.    
+    return num_crossings % 2 == 1
+
+
+# Tests.
 test1 = [[0,1,1,1,0],
          [0,1,0,1,0],
          [0,1,1,1,0],
@@ -100,4 +100,4 @@ test3 = [[1,1,1,0,0,0],
          [1,0,0,0,0,1],
          [1,1,1,1,1,1]]
 
-print is_contained(test3, 0,5)
+print is_contained(test3, 0, 5)
